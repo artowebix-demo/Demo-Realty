@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import "./index.css";
 
@@ -11,11 +12,11 @@ const properties = [
     area: "1,420 sq.ft.",
     status: "Ready to Move",
     image: `${import.meta.env.BASE_URL}property1.jpg`,
-gallery: [
-  `${import.meta.env.BASE_URL}property2.jpg`,
-  `${import.meta.env.BASE_URL}property3.jpg`,
-  `${import.meta.env.BASE_URL}property4.png`,
-],
+    gallery: [
+      `${import.meta.env.BASE_URL}property2.jpg`,
+      `${import.meta.env.BASE_URL}property3.jpg`,
+      `${import.meta.env.BASE_URL}property4.png`,
+    ],
     description:
       "A refined 3 BHK residence designed around generous living spaces, elegant interiors and effortless connectivity to Mumbai.",
     features: ["3 Bedrooms", "3 Bathrooms", "2 Parking", "Club Access"],
@@ -224,8 +225,30 @@ function App() {
       ? area * 0.092903
       : area / 0.092903;
 
+  /*
+    =========================================================
+    EXTERNAL CONTACT LINKS
+    =========================================================
+
+    Using normal <a> links instead of window.open /
+    window.location prevents GitHub Pages from navigating
+    the SPA to a blank page.
+  */
+
+  const WHATSAPP_NUMBER = "919876543210";
+  const PHONE_NUMBER = "+919876543210";
+
+  const getWhatsAppLink = (propertyName = "a property") => {
+    const message = encodeURIComponent(
+      `Hi Demo Realty, I am interested in ${propertyName}. Please share more details.`
+    );
+
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+  };
+
   useEffect(() => {
     document.body.style.overflow = selectedProperty ? "hidden" : "";
+
     return () => {
       document.body.style.overflow = "";
     };
@@ -277,21 +300,6 @@ function App() {
     setPropertyImage(0);
   };
 
-  const openWhatsApp = (propertyName = "a property") => {
-    const message = encodeURIComponent(
-      `Hi Demo Realty, I am interested in ${propertyName}. Please share more details.`
-    );
-
-    window.open(
-      `https://wa.me/919876543210?text=${message}`,
-      "_blank"
-    );
-  };
-
-  const callAgent = () => {
-    window.location.href = "tel:+919876543210";
-  };
-
   const handleHeroMouseMove = (event) => {
     const x =
       (event.clientX / window.innerWidth - 0.5) * 2;
@@ -326,6 +334,7 @@ function App() {
           </button>
 
           <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
+
             <button onClick={() => scrollToSection("home")}>
               Home
             </button>
@@ -360,6 +369,7 @@ function App() {
             >
               Contact
             </button>
+
           </nav>
 
           <button
@@ -502,6 +512,7 @@ function App() {
           </h2>
 
           <div>
+
             <p>
               Your next home should be more than an address.
               It should fit your lifestyle, your ambitions and
@@ -513,6 +524,7 @@ function App() {
               approach to make property discovery easier,
               clearer and more enjoyable.
             </p>
+
           </div>
 
         </div>
@@ -557,6 +569,7 @@ function App() {
         <div className="section-heading">
 
           <div>
+
             <div className="section-label">
               <span>02</span>
               FEATURED COLLECTION
@@ -566,6 +579,7 @@ function App() {
               Homes selected
               <em> for how you live.</em>
             </h2>
+
           </div>
 
           <p>
@@ -627,6 +641,7 @@ function App() {
                   <div className="property-card-top">
 
                     <div>
+
                       <span className="property-type">
                         {property.type}
                       </span>
@@ -637,6 +652,7 @@ function App() {
                         <span>⌖</span>
                         {property.location}
                       </p>
+
                     </div>
 
                     <strong>
@@ -668,6 +684,7 @@ function App() {
             ))}
 
           </div>
+
 
           <button
             className="carousel-arrow carousel-next"
@@ -777,18 +794,22 @@ function App() {
         <div className="gallery-grid">
 
           <div className="gallery-main">
+
             <img
-  src={`${import.meta.env.BASE_URL}hall.jpg`}
-  alt="Luxury home interior"
-/>
+              src={`${import.meta.env.BASE_URL}hall.jpg`}
+              alt="Luxury home interior"
+            />
 
             <div className="gallery-caption">
               <span>01</span>
               Contemporary Living
             </div>
+
           </div>
 
+
           <div className="gallery-small">
+
             <img
               src={`${import.meta.env.BASE_URL}bedroom.jpg`}
               alt="Premium bedroom interior"
@@ -798,9 +819,12 @@ function App() {
               <span>02</span>
               Quiet Luxury
             </div>
+
           </div>
 
+
           <div className="gallery-small">
+
             <img
               src={`${import.meta.env.BASE_URL}washroom.jpg`}
               alt="Luxury dining interior"
@@ -810,6 +834,7 @@ function App() {
               <span>03</span>
               Modern Living
             </div>
+
           </div>
 
         </div>
@@ -932,16 +957,23 @@ function App() {
             <h3>Monthly EMI</h3>
 
             <div className="calculator-result">
-              <small>Estimated monthly payment</small>
+
+              <small>
+                Estimated monthly payment
+              </small>
+
               <strong>
                 ₹{formattedINR(emi)}
               </strong>
+
             </div>
 
 
             <label>
               Loan Amount
-              <span>₹{formattedINR(loanAmount)}</span>
+              <span>
+                ₹{formattedINR(loanAmount)}
+              </span>
             </label>
 
             <input
@@ -958,7 +990,9 @@ function App() {
 
             <label>
               Interest Rate
-              <span>{interestRate}%</span>
+              <span>
+                {interestRate}%
+              </span>
             </label>
 
             <input
@@ -975,7 +1009,9 @@ function App() {
 
             <label>
               Loan Tenure
-              <span>{loanYears} Years</span>
+              <span>
+                {loanYears} Years
+              </span>
             </label>
 
             <input
@@ -994,6 +1030,7 @@ function App() {
 
               <div>
                 <span>Total Interest</span>
+
                 <strong>
                   ₹{formattedINR(totalInterest)}
                 </strong>
@@ -1001,6 +1038,7 @@ function App() {
 
               <div>
                 <span>Total Payment</span>
+
                 <strong>
                   ₹{formattedINR(totalPayment)}
                 </strong>
@@ -1018,7 +1056,9 @@ function App() {
               AREA CONVERTER
             </div>
 
-            <h3>Understand your space.</h3>
+            <h3>
+              Understand your space.
+            </h3>
 
             <div className="area-input">
 
@@ -1036,6 +1076,7 @@ function App() {
                   setAreaUnit(e.target.value)
                 }
               >
+
                 <option value="sqft">
                   Sq. Ft.
                 </option>
@@ -1043,6 +1084,7 @@ function App() {
                 <option value="sqm">
                   Sq. M.
                 </option>
+
               </select>
 
             </div>
@@ -1050,7 +1092,9 @@ function App() {
 
             <div className="area-result">
 
-              <span>Approximate conversion</span>
+              <span>
+                Approximate conversion
+              </span>
 
               <strong>
                 {convertedArea.toFixed(2)}
@@ -1128,11 +1172,13 @@ function App() {
           </div>
 
 
+          {/* FIXED GOOGLE MAPS LINK */}
+
           <a
             className="map-button"
             href="https://maps.app.goo.gl/ivk7XAhoXLeTgWPm7"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             Open Google Maps
             <span>↗</span>
@@ -1189,6 +1235,7 @@ function App() {
         <div className="faq-layout">
 
           <div>
+
             <h2>
               Questions,
               <em> answered.</em>
@@ -1198,6 +1245,7 @@ function App() {
               Everything you need to know before starting
               your property search.
             </p>
+
           </div>
 
 
@@ -1224,7 +1272,9 @@ function App() {
                     {String(index + 1).padStart(2, "0")}
                   </span>
 
-                  <strong>{faq.q}</strong>
+                  <strong>
+                    {faq.q}
+                  </strong>
 
                   <i>
                     {activeFaq === index ? "−" : "+"}
@@ -1235,7 +1285,9 @@ function App() {
 
                 <div className="faq-answer">
 
-                  <p>{faq.a}</p>
+                  <p>
+                    {faq.a}
+                  </p>
 
                 </div>
 
@@ -1276,23 +1328,31 @@ function App() {
             help you discover the right property.
           </p>
 
+
           <div className="contact-buttons">
 
-            <button
+            {/* FIXED WHATSAPP */}
+
+            <a
               className="primary-button"
-              onClick={() => openWhatsApp()}
+              href={getWhatsAppLink()}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               WhatsApp Us
               <span>↗</span>
-            </button>
+            </a>
 
-            <button
+
+            {/* FIXED PHONE */}
+
+            <a
               className="secondary-button"
-              onClick={callAgent}
+              href={`tel:${PHONE_NUMBER}`}
             >
               Call +91 98765 43210
               <span>↗</span>
-            </button>
+            </a>
 
           </div>
 
@@ -1310,6 +1370,7 @@ function App() {
           <div className="footer-brand">
 
             <div className="brand">
+
               <span className="brand-mark">
                 DR
               </span>
@@ -1318,6 +1379,7 @@ function App() {
                 <strong>DEMO</strong>
                 <span>REALTY</span>
               </span>
+
             </div>
 
             <p>
@@ -1333,15 +1395,27 @@ function App() {
 
             <span>EXPLORE</span>
 
-            <button onClick={() => scrollToSection("properties")}>
+            <button
+              onClick={() =>
+                scrollToSection("properties")
+              }
+            >
               Properties
             </button>
 
-            <button onClick={() => scrollToSection("experience")}>
+            <button
+              onClick={() =>
+                scrollToSection("experience")
+              }
+            >
               Experience
             </button>
 
-            <button onClick={() => scrollToSection("market")}>
+            <button
+              onClick={() =>
+                scrollToSection("market")
+              }
+            >
               Market
             </button>
 
@@ -1352,15 +1426,27 @@ function App() {
 
             <span>TOOLS</span>
 
-            <button onClick={() => scrollToSection("calculators")}>
+            <button
+              onClick={() =>
+                scrollToSection("calculators")
+              }
+            >
               EMI Calculator
             </button>
 
-            <button onClick={() => scrollToSection("location")}>
+            <button
+              onClick={() =>
+                scrollToSection("location")
+              }
+            >
               Location
             </button>
 
-            <button onClick={() => scrollToSection("faq")}>
+            <button
+              onClick={() =>
+                scrollToSection("faq")
+              }
+            >
               FAQ
             </button>
 
@@ -1371,13 +1457,24 @@ function App() {
 
             <span>CONTACT</span>
 
-            <button onClick={callAgent}>
-              +91 98765 43210
-            </button>
+            {/* FIXED PHONE */}
 
-            <button onClick={() => openWhatsApp()}>
+            <a
+              href={`tel:${PHONE_NUMBER}`}
+            >
+              +91 98765 43210
+            </a>
+
+
+            {/* FIXED WHATSAPP */}
+
+            <a
+              href={getWhatsAppLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               WhatsApp
-            </button>
+            </a>
 
             <span>
               Mira Road East, Mumbai
@@ -1409,17 +1506,23 @@ function App() {
 
         <div
           className="property-modal"
-          onClick={() => setSelectedProperty(null)}
+          onClick={() =>
+            setSelectedProperty(null)
+          }
         >
 
           <div
             className="property-modal-inner"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           >
 
             <button
               className="modal-close"
-              onClick={() => setSelectedProperty(null)}
+              onClick={() =>
+                setSelectedProperty(null)
+              }
               aria-label="Close property details"
             >
               ×
@@ -1430,7 +1533,9 @@ function App() {
 
               <img
                 src={
-                  selectedProperty.gallery[propertyImage]
+                  selectedProperty.gallery[
+                    propertyImage
+                  ]
                 }
                 alt={selectedProperty.name}
               />
@@ -1441,9 +1546,11 @@ function App() {
                 <button
                   onClick={() =>
                     setPropertyImage(
-                      (propertyImage -
+                      (
+                        propertyImage -
                         1 +
-                        selectedProperty.gallery.length) %
+                        selectedProperty.gallery.length
+                      ) %
                         selectedProperty.gallery.length
                     )
                   }
@@ -1501,10 +1608,12 @@ function App() {
 
                 {selectedProperty.features.map(
                   (feature) => (
+
                     <div key={feature}>
                       <span>✓</span>
                       {feature}
                     </div>
+
                   )
                 )}
 
@@ -1515,6 +1624,7 @@ function App() {
 
                 <div>
                   <span>AREA</span>
+
                   <strong>
                     {selectedProperty.area}
                   </strong>
@@ -1522,6 +1632,7 @@ function App() {
 
                 <div>
                   <span>STATUS</span>
+
                   <strong>
                     {selectedProperty.status}
                   </strong>
@@ -1532,25 +1643,30 @@ function App() {
 
               <div className="modal-actions">
 
-                <button
+                {/* FIXED WHATSAPP */}
+
+                <a
                   className="primary-button"
-                  onClick={() =>
-                    openWhatsApp(
-                      selectedProperty.name
-                    )
-                  }
+                  href={getWhatsAppLink(
+                    selectedProperty.name
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Enquire on WhatsApp
                   <span>↗</span>
-                </button>
+                </a>
 
-                <button
+
+                {/* FIXED PHONE */}
+
+                <a
                   className="secondary-button"
-                  onClick={callAgent}
+                  href={`tel:${PHONE_NUMBER}`}
                 >
                   Call Agent
                   <span>↗</span>
-                </button>
+                </a>
 
               </div>
 
